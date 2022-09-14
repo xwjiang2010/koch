@@ -1,0 +1,25 @@
+service:
+  name: prediction
+livenessProbe:
+  path: "/service/status"
+  initialDelaySeconds: 15
+  timeoutSeconds: 15
+  scheme: "HTTP"
+  probeType: "httpGet"
+readinessProbe:
+  path: "/service/healthcheck/gtg"
+  initialDelaySeconds: 5
+  timeoutSeconds: 3
+  scheme: "HTTP"
+  probeType: "httpGet"
+nodeSelector:
+  kgsa-resource-type: application
+resources:
+  requests:
+    cpu: 100m
+    memory: 512Mi
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: null
+    konghq.com/strip-path: "true"
+    konghq.com/plugins: basic-auth

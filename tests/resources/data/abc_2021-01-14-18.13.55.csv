@@ -1,0 +1,4 @@
+,0
+exec_environment,sequential
+data_storage_type,s3
+data_file_type,csv

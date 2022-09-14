@@ -1,0 +1,1 @@
+INSERT INTO "kgsa-core-prediction-v1".model_parameter (param_id, model_name, model_type, model_id, param_category, param_name, param_type, param_required, param_default_value, update_ts) VALUES (1, 'ARIMA', 'Univariate', 1, 'Parameter', 'p', 'int', true, '1', '2020-11-20 00:00:00.000000');

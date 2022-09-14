@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kongconfig
+data:
+  kong.yml: |
+    _format_version: "1.1"
+    services:
+    - url: "http://qa-1x6wbl-auto-deploy.kgsa-core-prediction-7489-qa-1x6wbl.svc:5000"
+      routes:
+      - paths:
+        - "/"
+      - hosts:
+        - "kgsa-qa.kochcloud.com"
+        - "prediction.kgsa-qa.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 60
+          policy: local
+      - name: basic-auth
+    consumers:
+    - username: devin
+      basicauth_credentials:
+      - username: devin
+        password: "Weapons-Architectural-Transformation-Jpeg-2"
+    - username: badrul
+      basicauth_credentials:
+      - username: badrul
+        password: "Pupil-Showcase-Migration-Copies-0"
+    - username: maxim
+      basicauth_credentials:
+      - username: maxim
+        password: "Restore-Liable-Titles-Efficiency-5"
+    - username: yeonjoo
+      basicauth_credentials:
+      - username: yeonjoo
+        password: "Weights-Tests-Surfaces-Incentives-0"
+    - username: siliconplains44
+      basicauth_credentials:
+      - username: siliconplains44
+        password: "Feed-Definitions-Portal-Scorn-Prevention-6"
+    - username: c3-dev
+      basicauth_credentials:
+      - username: c3-qa-fhr-lv
+        password: "Reprints-Bracket-Customer-Classification-2"

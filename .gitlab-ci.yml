@@ -1,0 +1,8 @@
+include:
+  - template: Auto-DevOps.gitlab-ci.yml
+  - local: .gitlab/Build.gitlab-ci.yml
+  - local: .gitlab/Test.gitlab-ci.yml
+  - local: .gitlab/Deploy.gitlab-ci.yml
+
+variables:
+  DOCKER_DRIVER: overlay2

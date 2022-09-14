@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:324339958539:certificate/78e6a1cf-979c-42df-acdd-bab47f94e58a
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+spec:
+  type: LoadBalancer
+  ports:
+    - name: kong-proxy-https
+      port: 443
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    app: kong

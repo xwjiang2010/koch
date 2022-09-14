@@ -1,0 +1,108 @@
+{
+// Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {"name":"Python: Run Tuning","type":"python","request":"launch","program":"prediction/app/worker/training_mediator.py",
+            "args": [
+                "--run-id",
+                "599",
+                "--user",
+                "devin",
+                "--action",
+                "tune",
+                "--log-level",
+                "debug"
+            ],
+            "env": {
+                "DATABASE_URL": "postgresql://postgres:local_db_password@localhost/postgres",
+                "JSON_LOGS": "0",
+                "RUN_LOCAL": "1",
+            },
+            "console":"integratedTerminal"
+        },
+        {"name":"Python: Run Training","type":"python","request":"launch","program":"prediction/app/worker/training_mediator.py",
+            "args": [
+                "--run-id",
+                "599",
+                "--user",
+                "devin",
+                "--action",
+                "train",
+                "--log-level",
+                "debug"
+            ],
+            "env": {
+                "DATABASE_URL": "postgresql://postgres:local_db_password@localhost/postgres",
+                "JSON_LOGS": "0",
+                "RUN_LOCAL": "1",
+            },
+            "console":"integratedTerminal"
+        },
+        {"name":"Python: Run Predict","type":"python","request":"launch","program":"prediction/app/worker/scoring_mediator.py",
+            "args": [
+                "--run-id",
+                "604",
+                "--user",
+                "devin",
+                "--action",
+                "score",
+                "--log-level",
+                "debug"
+            ],
+            "env": {
+                "DATABASE_URL": "postgresql://postgres:local_db_password@localhost/postgres",
+                "JSON_LOGS": "0",
+                "RUN_LOCAL": "1",
+            },
+            "console":"integratedTerminal"
+        },
+        {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8080",
+                "prediction.master_server:app"
+            ],
+            "env": {
+                "DATABASE_URL": "postgresql://postgres:local_db_password@localhost/postgres",
+                "JSON_LOGS": "0",
+                "RUN_LOCAL": "1",
+                "LOCAL_CLUSTER": "0",
+                "CLUSTER_ID": "devin",
+                "CLUSTER_ENV": "prediction-service:39"
+            },
+            "jinja": true
+        },
+        {
+            "name": "Python: Pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "./tests/src/tsa/test_prophet_predictor.py",
+                "-vvv",
+                "-s",
+                "-k",
+                "testNormalPredictFeatures"
+            ],
+            "env": {
+                "DATABASE_URL": "postgresql://postgres:local_db_password@localhost/postgres",
+                "JSON_LOGS": "0",
+                "RUN_LOCAL": "1",
+                "LOCAL_CLUSTER": "0",
+                "CLUSTER_ID": "devin",
+                "CLUSTER_ENV": "prediction-service:39"
+            },
+            "jinja": true
+        }
+
+    ]
+}

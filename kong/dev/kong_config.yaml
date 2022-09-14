@@ -1,0 +1,151 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kongconfig
+data:
+  kong.yml: |
+    _format_version: "1.1"
+    services:
+    - url: "http://review-test-error-nv4r89-auto-deploy.kgsa-core-prediction-7489-review-test-error-nv4r89.svc:5000"
+      routes:
+      - hosts:
+        - "test-prediction.kgsa-dev.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 500
+          policy: local
+      - name: basic-auth
+    - url: "http://review-main-yi2y9f-auto-deploy.ray-playground-10814-review-main-yi2y9f.svc:5000"
+      routes:
+      - hosts:
+        - "ray-playground.kgsa-dev.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 500
+          policy: local
+      - name: basic-auth
+    - url: "http://development-auto-deploy.kgsa-core-prediction-7489-development.svc:5000"
+      routes:
+      - paths:
+        - "/review/"
+        hosts:
+        - "prediction.kgsa-dev.kochcloud.com"
+        - "kgsa-dev.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 500
+          policy: local
+      - name: basic-auth
+    - url: "http://review-ray-crd-wwz9jp-auto-deploy.kgsa-core-prediction-7489-review-ray-crd-wwz9jp.svc:5000"
+      routes:
+      - paths:
+        - "/devin/"
+        hosts:
+        - "prediction.kgsa-dev.kochcloud.com"
+        - "kgsa-dev.kochcloud.com"
+        - "devin.kgsa-dev.kochcloud.com"
+      - hosts:
+        - "devin.kgsa-dev.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 500
+          policy: local
+      - name: basic-auth
+    - url: "http://review-model-accu-qkofra-auto-deploy.kgsa-core-prediction-7489-review-model-accu-qkofra.svc:5000"
+      routes:
+      - paths:
+        - "/badrul/"
+        hosts:
+        - "prediction.kgsa-dev.kochcloud.com"
+        - "kgsa-dev.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 60
+          policy: local
+      - name: basic-auth
+    - url: "http://development-auto-deploy.kgsa-core-prediction-7489-development.svc:5000"
+      routes:
+      - paths:
+        - "/"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 60
+          policy: local
+      - name: basic-auth
+    - name: feature-ranking
+      url: "http://development-auto-deploy.feature-ranking-8187-development.svc:5000"
+      routes:
+      - paths:
+        - "/review/"
+        hosts:
+        - "ranking.kgsa-dev.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 60
+          policy: local
+      - name: basic-auth
+    - url: "http://development-auto-deploy.feature-ranking-8187-development.svc:5000"
+      routes:
+      - hosts:
+        - "ranking.kgsa-dev.kochcloud.com"
+      plugins:
+      - name: rate-limiting
+        config:
+          minute: 60
+          policy: local
+      - name: basic-auth
+    # - url: "http://localhost:8001"
+    #   routes:
+    #   - paths:
+    #     - "/admin-api/"
+    #   plugins:
+    #   - name: rate-limiting
+    #     config:
+    #       minute: 60
+    #       policy: local
+    #   - name: basic-auth
+    consumers:
+    - username: devin
+      basicauth_credentials:
+      - username: devin
+        password: "F%36^Bf5KnEXo^@0CX6ijO1"
+    - username: badrul
+      basicauth_credentials:
+      - username: badrul
+        password: "%IaY0lolDEOeQqsii$w9UO1"
+    - username: maxim
+      basicauth_credentials:
+      - username: maxim
+        password: "%iaX0loleEOeRqsxi$w7UO1"
+    - username: yeonjoo
+      basicauth_credentials:
+      - username: yeonjoo
+        password: "%iaX0l0legOecqsxi$w7UO1"
+    - username: siliconplains44
+      basicauth_credentials:
+      - username: siliconplains44
+        password: "%cjH&05cR&y@A4hpTcUnK1"
+    - username: c3-dev
+      basicauth_credentials:
+      - username: c3-dev-fhr-lv
+        password: "HOrbsDK1IATTTJzRrX!ysR3hfd%f38kf1"
+    - username: bibin
+      basicauth_credentials:
+      - username: bibin
+        password: "3$7AdE9OIJ6M1X*QUfuhD1"
+    - username: anand
+      basicauth_credentials:
+      - username: anand
+        password: "@x2%%h&Kgd4I4pUp6ow^V1"
+    - username: dermot
+      basicauth_credentials:
+      - username: dermot
+        password: "9ruTdutWeE!@B^1PQX@381"
